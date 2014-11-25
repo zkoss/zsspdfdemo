@@ -10,13 +10,12 @@ import org.zkoss.util.media.AMedia;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
-import org.zkoss.zss.model.Book;
-import org.zkoss.zss.model.Exporter;
-import org.zkoss.zss.model.Exporters;
-import org.zkoss.zss.model.Importer;
-import org.zkoss.zss.model.Importers;
-import org.zkoss.zss.model.impl.ExcelImporter;
-import org.zkoss.zss.model.impl.pdf.PdfExporter;
+
+import org.zkoss.zss.api.Exporter;
+import org.zkoss.zss.api.Exporters;
+import org.zkoss.zss.api.Importer;
+import org.zkoss.zss.api.Importers;
+import org.zkoss.zss.api.model.Book;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Filedownload;
 import org.zkoss.zul.Iframe;
@@ -52,15 +51,15 @@ public class ZssPdfComposer extends GenericForwardComposer {
 			Importer importer = Importers.getImporter("excel");
 			Book wb = importer.imports(media.getStreamData(), media.getName());
 
-			Exporter c = Exporters.getExporter("html");
-			((PdfExporter) c).enableHeadings(printHeadings.isChecked());
+			Exporter c = Exporters.getExporter("pdf");
+//			((PdfExporter) c).enableHeadings(printHeadings.isChecked());
 
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			c.export(wb, baos);
 //			c.exportActiveSheet(wb.getSheetAt(wb.getActiveSheetIndex()), os);
 //			c.exportSelection(wb.getSheetAt(wb.getActiveSheetIndex()), new AreaReference("A8:I18"), os);
 
-			final AMedia amedia = new AMedia(wb.getBookName(), "pdf",
+			final AMedia amedia = new AMedia("sample", "pdf",
 					"application/pdf", baos.toByteArray());
 
 			if(openFile.isChecked()) {
