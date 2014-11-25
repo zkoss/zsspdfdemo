@@ -1,0 +1,28 @@
+<?page title="zsspdf demo" contentType="text/html;charset=UTF-8"?>
+<zk>
+<borderlayout height="100%" apply="org.zkoss.zsspdf.demo.ZssPdfComposer" >
+    <west maxsize="24" size="24" border="0" collapsible="true" splittable="true">
+    <vbox>
+    <separator></separator>
+    <groupbox>
+    	<caption label="Excel to Pdf"></caption> 
+	    <vbox>
+	        <button id="xlsUploadBtn" label="Upload Spreadsheet" upload="true,maxsize=1000" />
+	        <checkbox id="printHeadings" checked="false" label="Print row/column headings"></checkbox>
+	    <groupbox>
+	    	<caption label="Pdf render options"></caption>
+	    	<separator></separator> 
+	        <radiogroup id="pdfRenderOptions">
+	        	<radio id="openFile" label="Open" checked="true"></radio>
+	        	<radio id="saveFile" label="Save"></radio>
+	       	</radiogroup>
+	    </groupbox>
+	    </vbox>
+    </groupbox>
+    </vbox>
+    </west>
+    <center border="none" flex="true">
+        <iframe id="report" />
+    </center>
+</borderlayout>
+</zk>
